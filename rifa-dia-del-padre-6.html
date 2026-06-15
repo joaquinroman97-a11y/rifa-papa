@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifa Día del Padre</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0d; font-family: 'Inter', sans-serif; color: #fff; min-height: 100vh; padding: 0 0 60px; }
+  .header { background: linear-gradient(135deg, #1a6b2a 0%, #0d3d16 100%); padding: 32px 24px 28px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,220,0,0.15) 0%, transparent 70%); }
+  .header-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 0.9; color: #fff; margin-bottom: 8px; }
+  .header-title span { color: #FFD700; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
+  .prize-section { padding: 28px 20px 0; max-width: 480px; margin: 0 auto; }
+  .prize-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #FFD700; margin-bottom: 12px; text-align: center; }
+  .prize-img { width: 100%; border-radius: 12px; display: block; border: 2px solid rgba(255,215,0,0.2); }
+  .prize-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+  .prize-item { background: #1a1a1a; border-radius: 8px; padding: 10px 8px; text-align: center; border: 1px solid rgba(255,215,0,0.15); }
+  .prize-item .icon { font-size: 20px; margin-bottom: 4px; }
+  .prize-item span { font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.3; display: block; }
+  .price-banner { margin: 24px 20px 0; max-width: 480px; margin-left: auto; margin-right: auto; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 12px; padding: 20px; text-align: center; }
+  .price-banner .price { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: #0d0d0d; line-height: 1; }
+  .price-banner .price-label { font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.6); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .price-banner .slots { margin-top: 10px; font-size: 13px; font-weight: 700; color: #0d0d0d; }
+  .numbers-section { padding: 28px 20px 0; max-width: 480px; margin: 0 auto; }
+  .numbers-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; text-align: center; margin-bottom: 16px; color: #fff; }
+  .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .num-btn { background: #1a1a1a; border: 2px solid rgba(255,215,0,0.3); border-radius: 8px; padding: 14px 4px; text-align: center; cursor: pointer; transition: all 0.15s; }
+  .num-btn:hover { border-color: #FFD700; background: rgba(255,215,0,0.08); transform: scale(1.05); }
+  .num-btn.taken { background: #1a0a0a; border-color: rgba(255,50,50,0.25); cursor: not-allowed; opacity: 0.5; pointer-events: none; }
+  .num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #FFD700; }
+  .num-btn.taken .num { color: rgba(255,255,255,0.2); text-decoration: line-through; }
+  .num-status { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 2px; letter-spacing: 0.05em; }
+  .num-btn.taken .num-status { color: rgba(255,80,80,0.5); }
+  .legend { display: flex; gap: 16px; justify-content: center; margin-top: 14px; font-size: 11px; color: rgba(255,255,255,0.5); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; }
+  .dot-free { background: rgba(255,215,0,0.3); border: 1px solid #FFD700; }
+  .dot-taken { background: #1a0a0a; border: 1px solid rgba(255,80,80,0.3); }
+  .date-section { margin: 24px 20px 0; max-width: 480px; margin-left: auto; margin-right: auto; background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(255,215,0,0.15); }
+  .date-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 6px; }
+  .date { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #FFD700; line-height: 1; }
+  .date-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .cta-section { margin: 20px 20px 0; max-width: 480px; margin-left: auto; margin-right: auto; text-align: center; }
+  .cta-text { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 14px; line-height: 1.5; }
+  .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; font-weight: 700; font-size: 15px; padding: 16px 32px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+  .btn-wa svg { width: 20px; height: 20px; fill: #fff; }
+</style>
+</head>
+<body>
+<div class="header">
+  <p class="header-eyebrow">Sorteo especial</p>
+  <h1 class="header-title">RIFA<br><span>DÍA DEL PADRE</span></h1>
+  <p class="header-sub">21 de Junio · Solo 25 números</p>
+</div>
+<div class="prize-section">
+  <p class="prize-label">🏆 El premio</p>
+  <img class="prize-img" src="data:image/jpeg;base64,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" class="prize-img">
+  <div class="prize-items">
+    <div class="prize-item"><div class="icon">🐷</div><span>Lechón entero</span></div>
+    <div class="prize-item"><div class="icon">🍷</div><span>Fisuras de vino</span></div>
+    <div class="prize-item"><div class="icon">🍫</div><span>Caja de bombones</span></div>
+  </div>
+</div>
+<div class="price-banner">
+  <div class="price">$2.000</div>
+  <div class="price-label">Valor del número</div>
+  <div class="slots">¡Elegí tu número de la suerte!</div>
+</div>
+<div class="numbers-section">
+  <h2 class="numbers-title">Números Disponibles</h2>
+  <div class="numbers-grid">
+    <div class="num-btn"><span class="num">01</span><div class="num-status">Libre</div></div>
+    <div class="num-btn taken"><span class="num">02</span><div class="num-status">Comprado</div></div>
+    <div class="num-btn taken"><span class="num">03</span><div class="num-status">Comprado</div></div>
+    <div class="num-btn"><span class="num">04</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">05</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">06</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">07</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">08</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">09</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">10</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">11</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">12</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">13</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">14</span><div class="num-status">Libre</div></div>
+    <div class="num-btn taken"><span class="num">15</span><div class="num-status">Comprado</div></div>
+    <div class="num-btn taken"><span class="num">16</span><div class="num-status">Comprado</div></div>
+    <div class="num-btn"><span class="num">17</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">18</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">19</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">20</span><div class="num-status">Libre</div></div>
+    <div class="num-btn taken"><span class="num">21</span><div class="num-status">Comprado</div></div>
+    <div class="num-btn"><span class="num">22</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">23</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">24</span><div class="num-status">Libre</div></div>
+    <div class="num-btn"><span class="num">25</span><div class="num-status">Libre</div></div>
+  </div>
+  <div class="legend">
+    <span><div class="dot dot-free"></div> Libre</span>
+    <span><div class="dot dot-taken"></div> Comprado</span>
+  </div>
+</div>
+<div class="date-section">
+  <p class="date-label">📅 Fecha del sorteo</p>
+  <div class="date">DOMINGO 21 JUNIO</div>
+  <p class="date-sub">Por Lotería Nacional Nocturna</p>
+</div>
+<div class="cta-section">
+  <p class="cta-text">Hacé clic en el botón de abajo para reservar tu número directamente por WhatsApp</p>
+  <a href="https://wa.me/5491100000000?text=Hola,%20quiero%20comprar%20un%20n%C3%BAmero%20para%20la%20rifa" class="btn-wa" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-2.297c1.551.921 3.125 1.405 4.836 1.406 5.511 0 9.994-4.482 9.997-9.993.002-2.669-1.026-5.178-2.895-7.051C16.616 4.192 14.12 3.161 11.45 3.16 5.938 3.16 1.455 7.642 1.452 13.153c-.001 1.77.466 3.497 1.352 5.013L1.81 22.183l4.837-1.267-.22.131c-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.5-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+    Reservar por WhatsApp
+  </a>
+</div>
+</body>
+</html>
